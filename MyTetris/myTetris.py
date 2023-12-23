@@ -165,11 +165,12 @@ class board:
         
 class tetrisGame:
 
-    def __init__(self):
+    def __init__(self, queue=None):
         self.board = board()
         self.score = 0
         self.tiles = tiles()
-        self.currentTile = self.tiles.gen_tile()
+        self.queued_tiles = queue
+        self.currentTile = self.spawn_tile()
         # place the first tile on
         self.board.place_tile(self.tiles, self.currentTile)
         self.gameover = False
@@ -180,6 +181,15 @@ class tetrisGame:
 
     def get_score(self):
         return self.score
+
+    def get_tile(self):
+        return self.currentTile
+
+    def spawn_tile(self):
+        if self.queued_tile is None:
+            return self.tiles.gen_tile()
+        else:
+            return tile(self.queued_tiles.pop(0))
 
     def is_game_over(self):
         return self.gameover
@@ -202,7 +212,7 @@ class tetrisGame:
                 self.gameover = True
                 return
             self.score += new_points
-            self.currentTile = self.tiles.gen_tile()
+            self.currentTile = self.spawn_tile()
             self.board.place_tile(self.tiles, self.currentTile)
 
 
