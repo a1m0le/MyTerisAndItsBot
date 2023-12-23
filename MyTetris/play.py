@@ -2,6 +2,8 @@
 
 import os
 import myTetris
+import vlc
+
 
 def refresh_display():
     os.system("clear")
@@ -65,6 +67,8 @@ def display_all(game):
 
 
 if __name__=="__main__":
+    p = vlc.MediaPlayer("bgm.mp3")
+    p.play()
     game = myTetris.tetrisGame()
     mapping = {'a':1,'d':2,'w':3,'s':4}
     while not game.is_game_over():
