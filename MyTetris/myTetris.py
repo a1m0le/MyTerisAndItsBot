@@ -140,7 +140,7 @@ class board:
                     # GAME OVER
                     return -999
         newi = 19
-        oldi = None
+        oldi = 6 
         for i in range(19, 5, -1):
             flag = 2
             stop_flag = 0
@@ -155,12 +155,11 @@ class board:
                     self.board[newi][j] = self.board[i][j]
                 newi -= 1
             else:
-                points += 100
+                points += 1
 
         for i in range(oldi, newi+1):
             self.board[i] = [0,0,0,0,0,0,0,0,0,0]
-        return points
-
+        return max(0,(points*2-1)*100)
 
 
         
